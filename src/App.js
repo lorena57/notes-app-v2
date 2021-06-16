@@ -22,14 +22,22 @@ function App() {
     setNotes(notes.filter((notes) => notes.id !== idToDelete));
   };
 
+  const [activeNote, setActiveNote] = useState(false);
+
+  const getActiveNote = () => {
+    return notes.find((note) => note.id === activeNote);
+  };
+
   return (
     <div className="App">
       <Sidebar
         notes={notes}
         onAddNote={onAddNote}
         onDeleteNote={onDeleteNote}
+        activeNote={activeNote}
+        setActiveNote={setActiveNote}
       />
-      <Main />
+      <Main activeNote={getActiveNote()} />
     </div>
   );
 }
