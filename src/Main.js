@@ -2,10 +2,10 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 
 const Main = ({ activeNote, onUpdateNote }) => {
-  const onEditField = (key, value) => {
+  const onEditField = (field, value) => {
     onUpdateNote({
       ...activeNote,
-      [key]: value,
+      [field]: value,
       lastModified: Date.now(),
     });
   };
@@ -20,17 +20,15 @@ const Main = ({ activeNote, onUpdateNote }) => {
           type="text"
           id="title"
           value={activeNote.title}
-          onchange={(e) => onEditField('title', e.target.value)}
+          onChange={(e) => onEditField('title', e.target.value)}
           autoFocus
         />
         <textarea
           id="body"
           placeholder="Write your note here..."
           value={activeNote.body}
-          onchange={(e) => onEditField('body', e.target.value)}
-          cols="30"
-          rows="10"
-        ></textarea>
+          onChange={(e) => onEditField('body', e.target.value)}
+        />
       </div>
       <div className="app-main-note-preview">
         <h1 className="preview-title">{activeNote.title}</h1>
