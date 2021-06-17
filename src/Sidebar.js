@@ -29,7 +29,7 @@ const Sidebar = ({
             <p>{body && body.substr(0, 100) + '...'}</p>
 
             <small className="note-meta">
-              Last modified{' '}
+              Last Modified{' '}
               {new Date(lastModified).toLocaleDateString('en-US', {
                 hour: '2-digit',
                 minute: '2-digit',
