@@ -5,7 +5,9 @@ import { useState } from 'react';
 import uuid from 'react-uuid';
 
 function App() {
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState(
+    localStorage.notes ? JSON.parse(localStorage.notes) : []
+  );
 
   const onAddNote = () => {
     const newNote = {
@@ -19,19 +21,19 @@ function App() {
     setActiveNote(newNote.id);
   };
 
-  const onDeleteNote = (idToDelete) => {
-    setNotes(notes.filter((notes) => notes.id !== idToDelete));
+  const onDeleteNote = (noteId) => {
+    setNotes(notes.filter(({ id }) => id !== noteId));
   };
 
   const [activeNote, setActiveNote] = useState(false);
 
   const getActiveNote = () => {
-    return notes.find((note) => note.id === activeNote);
+    return notes.find(({ id }) => id === activeNote);
   };
 
   const onUpdateNote = (updatedNote) => {
     const updatedNotesArray = notes.map((note) => {
-      if (note.id === activeNote) {
+      if (note.id === updatedNote.id) {
         return updatedNote;
       }
       return note;
